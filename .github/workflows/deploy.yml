@@ -38,7 +38,7 @@ jobs:
         APPLICATION_NAME: ${{ secrets.APPLICATION_NAME }}
         ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
         BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
-        SPRING_PROFILES_ACTIVE: "dev" # Set the active profile here
+        ENVIRONMENT: ${{secrets.ENVIRONMENT}} # Set the active profile here
       run: |
         # Install AWS CLI
         sudo apt-get update && sudo apt-get install -y python3-pip
