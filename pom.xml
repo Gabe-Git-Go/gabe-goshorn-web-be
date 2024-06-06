@@ -57,6 +57,13 @@
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-ses</artifactId>
+			<version>1.12.224</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -75,7 +82,7 @@
 							<schemaPaths>
 								<param>src/main/resources/graphql-client</param>
 							</schemaPaths>
-							<packageName>com.gabe.website.gabegoshornwebbe.codegen</packageName>
+							<packageName>com.gabe.website.codegen</packageName>
 							<addGeneratedAnnotation>true</addGeneratedAnnotation>
 						</configuration>
 					</execution>
@@ -103,6 +110,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+				    <mainClass>com.gabe.website.GabeGoshornWebApplication</mainClass>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
