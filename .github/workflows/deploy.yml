@@ -30,7 +30,14 @@ jobs:
     - name: Build with Maven
       run: mvn clean package
 
-    - name: Deploy to Elastic Beanstalk
+    - name: Set up for aws cli
+      uses: aws-actions/configure-aws-credentials@v2
+      with : 
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Upload to S3 Bucket
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -39,15 +46,6 @@ jobs:
         ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
         BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
         ENVIRONMENT: ${{secrets.ENVIRONMENT}} # Set the active profile here
-      
-      uses: aws-actions/configure-aws-credentials@v2
-
-      with : 
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
-
-    - name: Upload to S3 Bucket
       run: |
         # Install AWS CLI
         sudo apt-get update && sudo apt-get install -y python3-pip
