@@ -45,7 +45,7 @@ jobs:
         pip3 install awscli --upgrade --user
         export PATH=$PATH:$HOME/.local/bin
         # Package the application
-        zip -r application.zip target/gabe-goshorn-web-be.jar
+        zip -r application.zip target/gabe-goshorn-web-be-0.0.1-SNAPSHOT.jar
         # Upload the package to S3
         aws s3 cp application.zip s3://$BUCKET_NAME/application.zip
         # Create a new application version
