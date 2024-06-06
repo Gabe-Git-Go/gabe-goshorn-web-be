@@ -39,6 +39,15 @@ jobs:
         ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
         BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
         ENVIRONMENT: ${{secrets.ENVIRONMENT}} # Set the active profile here
+      
+      uses: aws-actions/configure-aws-credentials@v2
+
+      with : 
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Upload to S3 Bucket
       run: |
         # Install AWS CLI
         sudo apt-get update && sudo apt-get install -y python3-pip
@@ -47,7 +56,7 @@ jobs:
         # Package the application
         zip -r application.zip target/gabe-goshorn-web-be-0.0.1-SNAPSHOT.jar
         # Upload the package to S3
-        aws s3 cp application.zip s3://$BUCKET_NAME/application.zip --region $AWS_REGION
+        aws s3 cp application.zip s3://$BUCKET_NAME/application.zip
         # Create a new application version
         aws elasticbeanstalk create-application-version --application-name $APPLICATION_NAME --version-label $GITHUB_SHA --source-bundle S3Bucket=$BUCKET_NAME,S3Key=application.zip
         # Update the environment to use the new application version
