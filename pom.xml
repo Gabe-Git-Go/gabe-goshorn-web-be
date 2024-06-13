@@ -14,7 +14,9 @@
 	<name>gabe-goshorn-web-be</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>19</java.version>
+		<maven.compiler.source>19</maven.compiler.source>
+    	<maven.compiler.target>19</maven.compiler.target>
 	</properties>
 	<dependencies>
 
@@ -137,6 +139,11 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+    	</resources>
 	</build>
 
 </project>

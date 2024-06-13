@@ -53,3 +53,6 @@ hs_err_pid*
 
 #Ignore environment variable files
 .env
+
+#Ignore log files
+*.log
